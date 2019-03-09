@@ -28,9 +28,7 @@ public class HellController {
 	@Qualifier(value = "restTemplate")
 	private RestTemplate restTemplate;
 
-	@Autowired
-	@Qualifier(value = "lbcRestTemplate")
-	private RestTemplate lbcRestTemplate;
+
 
 	@Autowired
 	private LoadBalancerClient loadBalancerClient;
@@ -40,19 +38,13 @@ public class HellController {
 		return restTemplate.getForEntity("http://SERVICE/hello", String.class).getBody();
 	}
 
-//	@RequestMapping(value = "/hello2", method = RequestMethod.GET)
-//	public String hello2() {
-//		ServiceInstance instance = this.loadBalancerClient.choose("SERVICE");
-//		URI helloUri = URI.create(String.format("http://%s:%s/hello", instance.getHost(), instance.getPort()));
-//		logger.info("Target service uri = {}. ", helloUri.toString());
-//		return new RestTemplate().getForEntity(helloUri, String.class).getBody();
-//	}
-
 	@RequestMapping(value = "/hello2", method = RequestMethod.GET)
 	public String hello2() {
 		ServiceInstance instance = this.loadBalancerClient.choose("SERVICE");
 		URI helloUri = URI.create(String.format("http://%s:%s/hello", instance.getHost(), instance.getPort()));
 		logger.info("Target service uri = {}. ", helloUri.toString());
-		return this.lbcRestTemplate.getForEntity(helloUri, String.class).getBody();
+		return new RestTemplate().getForEntity(helloUri, String.class).getBody();
 	}
+
+
 }
