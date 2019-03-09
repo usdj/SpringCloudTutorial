@@ -16,8 +16,8 @@ import java.util.List;
  * @author: JerryDeng
  * @create: 2019-03-09 12:37
  **/
-@FeignClient("PRODUCT-SERVICE")
-@Component
+
+@FeignClient(value = "PRODUCT-SERVICE", fallback = ProductServiceFallback.class)
 public interface ProductService {
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	List<Product> findAll();

@@ -1,5 +1,5 @@
 server:
-  port: 8101
+  port: 8200
 spring:
   application:
     name: MALL-WEB
@@ -7,3 +7,11 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8000/eureka
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "hystrix.stream"
