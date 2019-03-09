@@ -28,7 +28,7 @@ public class HellController {
 	@Qualifier(value = "restTemplate")
 	private RestTemplate restTemplate;
 
-	
+
 
 	@Autowired
 	private LoadBalancerClient loadBalancerClient;
